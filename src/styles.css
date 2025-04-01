@@ -1,4 +1,311 @@
-body {
+/* Reset Sheet */
 
-    background-color: red;
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  font-family: "Roboto", serif;
+}
+
+#outerLayout {
+  display: grid;
+  grid-template-rows: 0.5fr 1.5fr 1fr;
+  height: 100%;
+}
+
+#menu {
+  display: grid;
+  grid-row: 1/2;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2rem;
+}
+
+#today {
+  justify-items: end;
+  display: grid;
+}
+
+#todayText {
+  width: 160px;
+  height: 60px;
+  font-size: 1.3rem;
+  text-align: center;
+  border-radius: 20px;
+  padding-top: 15px;
+  margin-right: 2rem;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtiler */
+
+  background-color: #f8f9fa;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#todayText:hover {
+  background-color: black;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #f8f9fa;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+#statisticsText:hover {
+  background-color: black;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: #f8f9fa;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+#statistic {
+  justify-items: start;
+  display: grid;
+}
+#statisticsText {
+  width: 160px;
+  height: 60px;
+  font-size: 1.3rem;
+  text-align: center;
+  border-radius: 20px;
+  padding-top: 15px;
+  margin-left: 2rem;
+  background-color: #f8f9fa;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtiler */
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#mainAreaToday {
+  grid-row: 2/3;
+  box-shadow: 8px 8px 10px rgba(0, 0, 0, 0.2);
+  width: 700px;
+  border-radius: 50px;
+  background-color: #f8f9fa;
+  justify-self: center;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-rows: 0.3fr 0.2fr 0.8fr;
+  transition: all 0.5s ease-in-out;
+
+}
+
+#mainAreaStats {
+  grid-row: 3/4;
+  width: 900px;
+  border-radius: 50px;
+  background-color: #f8f9fa;
+  justify-self: center;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-rows: 0.3fr 0.2fr 0.8fr;
+
+  
+}
+
+#textContainerToday {
+  grid-row: 1/2;
+  grid-column: 1/2;
+  text-align: center;
+  padding-top: 1.7rem;
+  padding-bottom: 1.5rem;
+  background-color: #313350;
+  color: white;
+  font-size: 1.6rem;
+  font-weight: 700;
+  border-top-right-radius: 250px;
+  border-top-left-radius: 250px;
+  border-bottom-left-radius: 250px;
+  border-bottom-right-radius: 250px;
+}
+
+#checkBoxes {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.1fr;
+  justify-items: center;
+}
+
+#one {
+  grid-column: 2/3;
+}
+
+#two {
+  grid-column: 3/4;
+}
+
+#three {
+  grid-column: 4/5;
+}
+#four {
+  grid-column: 5/6;
+}
+
+#five {
+  grid-column: 6/7;
+}
+
+#six {
+  grid-column: 7/8;
+}
+#seven {
+  grid-column: 8/9;
+}
+
+#eight {
+  grid-column: 9/10;
+}
+
+#nine {
+  grid-column: 10/11;
+}
+
+#ten {
+  grid-column: 11/12;
+}
+
+input[type="checkbox"] {
+  transform: scale(2.75); /* Vergrößert die Checkbox */
+}
+
+#checkBoxes {
+  position: relative;
+  background: linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.8),
+    rgba(255, 255, 0, 0.8),
+    rgba(0, 128, 0, 0.8)
+  ); /* Farben mit Transparenz */
+  padding: 30px; /* Abstand innerhalb des Formulars */
+  border-radius: 40px; /* Abgerundete Ecken */
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-top: 8rem;
+}
+
+#btnContainer {
+  display: grid;
+}
+
+#submitBtn {
+  margin-top: 3rem;
+  width: 130px;
+  height: 50px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  place-self: center;
+  border: none;
+  background-color: #2ec241;
+  color: white;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtiler */
+  cursor: pointer;
+  padding: 10px 20px;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#sad {
+  position: absolute;
+  height: 35px;
+  left: 43px;
+  bottom: 83px;
+  opacity: 0.9;
+  animation: fadeIn 3.5s ease-in-out forwards;
+}
+
+#happy {
+  position: absolute;
+  height: 35px;
+  left: 494px;
+  bottom: 83px;
+  opacity: 0.9;
+  animation: fadeIn 3.5s ease-in-out forwards;
+}
+
+#submitBtn:hover {
+  background-color: #1b8620; /* Intensiveres Grün beim Hovern */
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3); /* Tieferer Schatten */
 }
