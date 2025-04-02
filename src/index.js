@@ -1,10 +1,10 @@
 import "./styles.css";
 //import { moodTracker, days, defaultProject } from "./objects";
-import {getStats} from "./statistics.js";
+import {getStats, getMonthlyStats} from "./statistics.js";
 import { HashMap } from "./hashMap.js";
 
 const statsBtn = document.getElementById("statistics");
-const newHash = new HashMap();
+export const newHash = new HashMap();
 statsBtn.addEventListener("click", () => {
     getStats();
 })
@@ -17,7 +17,7 @@ document.getElementById("checkBoxes").addEventListener("submit", function (event
     console.log(selectedBox.value);
 
     newHash.set(selectedBox.value);
-
+    console.log(newHash);
 
   });
 
@@ -31,4 +31,5 @@ document.getElementById("checkBoxes").addEventListener("submit", function (event
         }
     });
 });
+
 
