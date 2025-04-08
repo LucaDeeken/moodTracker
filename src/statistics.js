@@ -1,11 +1,14 @@
-import { newHash } from "./index.js";
+import { loadedHash, HashMap } from "./hashMap.js";
+import {loadHashMapFromLocalStorage} from "./index.js";
 
-const mainArea = document.getElementById("mainAreaToday");
-const textContainer = document.getElementById("textContainerToday");
-const form = document.getElementById("checkBoxes");
-const sbmbtn = document.getElementById("btnContainer");
 
 export function getStats() {
+  const mainArea = document.querySelector(".mainArea");
+  const textContainer = document.getElementById("textContainerToday");
+const form = document.getElementById("checkBoxes");
+const sbmbtn = document.getElementById("btnContainer");
+  const loadedHash = loadHashMapFromLocalStorage();
+  console.log(loadedHash);
   textContainer.classList.add("fade-out");
   form.classList.add("fade-out");
   sbmbtn.classList.add("fade-out");
@@ -15,22 +18,25 @@ export function getStats() {
     mainArea.innerHTML = "";
     mainArea.id = "mainAreaStats";
     mainArea.innerHTML = ` <div id="textContainerStats"><p>How are you feeling today, Luca?</p></div><div id="statisticField"></div>`;
-    const tableContent = getMonthlyStats(newHash);
-    getGridsOnField(tableContent);
-  }, 300);
+    if(loadedHash!=null) {
+      const tableContent = getMonthlyStats(loadedHash);
+      getGridsOnField(tableContent);
+    }
+
+  }, 500);
 }
 
 
-export function getMonthlyStats(year) {
-
-    let allStats = [];
-    console.log(year.year.date);
-    for(let month in year.year.date) {
-        for (let dayObject of year.year.date[month]) {
-            allStats.push(dayObject.mood); // Wert des Tagesobjekts hinzufügen
-          }
-    }
-    console.log(allStats);
+function getMonthlyStats(loadedHash) {
+  let allStats = [];
+  let todayDate = new Date();
+  let year = todayDate.getFullYear();
+  const month = todayDate.getMonth();
+  year = String(year);
+  const found = loadedHash.array.find(obj => Object.values(obj).includes(year));
+  for (const dayObject of found.date[month]) {
+    allStats.push(dayObject.mood); // Wert des Tagesobjekts hinzufügen
+  }
     return allStats;
 }
 

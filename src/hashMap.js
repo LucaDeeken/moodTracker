@@ -8,14 +8,14 @@ export class Key {
 export class HashMap {
   constructor() {
     this.array = [];
-    this.year = {
+    const year = {
       year: "2025", // Name des Arrays
       date: [], // Das eigentliche Array
     };
-    this.array.push(this.year);
+    this.array.push(year);
     for (let i = 0; i < 12; i++) {
       let months = [];
-      this.year.date.push(months);
+      year.date.push(months);
     }
   }
   //turns date into a (easy)hashCode
@@ -34,6 +34,7 @@ export class HashMap {
     this.hash(todayString);
     this.manageCapacity(this.hashCode);
     this.pushKey(this.hashCode, newKey, todayString, mood);
+    localStorage.setItem("hashMap", this.toJSON());
     return this.hashCode;
   }
   //checks if the current year is present - and if not, creates it
@@ -69,4 +70,16 @@ export class HashMap {
     const todayString = new Date().toLocaleDateString();
     return todayString;
   }
+  toJSON() {
+    return JSON.stringify(this.array);
+  }
+  static fromJSON(jsonStr) {
+    const parsed = JSON.parse(jsonStr);
+    const newHash = new HashMap();
+    newHash.array = parsed;
+    return newHash;
+  }
 }
+
+const saved = localStorage.getItem("hashMap");
+export const loadedHash = HashMap.fromJSON(saved);

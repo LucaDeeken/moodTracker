@@ -2,34 +2,35 @@ import "./styles.css";
 //import { moodTracker, days, defaultProject } from "./objects";
 import {getStats, getMonthlyStats} from "./statistics.js";
 import { HashMap } from "./hashMap.js";
+import { DOMtoday, getTodayHTML} from "./today.js";
 
-const statsBtn = document.getElementById("statistics");
+const statsBtn = document.getElementById("statisticsText");
+const todayBtn = document.getElementById("todayText");
+
 export const newHash = new HashMap();
+DOMtoday();
+
+todayBtn.addEventListener("click", () => {
+    getTodayHTML();
+})
+
 statsBtn.addEventListener("click", () => {
     getStats();
 })
 
-document.getElementById("checkBoxes").addEventListener("submit", function (event) {
-    event.preventDefault(); // Verhindert das Neuladen der Seite
-    const checkBoxes = document.getElementsByClassName("inputCheckBox");
-    const checkBoxArray = Array.from(checkBoxes);
-    const selectedBox = checkBoxArray.find(checkBox => checkBox.checked === true);
-    console.log(selectedBox.value);
 
-    newHash.set(selectedBox.value);
-    console.log(newHash);
-
-  });
-
-  //only one checkbox should be checked
-  document.querySelectorAll(".inputCheckBox").forEach(checkbox => {
-    checkbox.addEventListener("change", function () {
-        if (this.checked) {
-            document.querySelectorAll(".inputCheckBox").forEach(cb => {
-                if (cb !== this) cb.checked = false;
-            });
-        }
-    });
-});
+export function loadHashMapFromLocalStorage() {
+    const saved = localStorage.getItem("hashMap");
+    
+    if (saved) {
+      const loadedHash = HashMap.fromJSON(saved); // Lade HashMap
+      return loadedHash;
+    } else {
+      return null; // Keine Daten im LocalStorage gefunden
+    }
+  }
+  
+  // Aufruf der Funktion und Speichern des Rückgabewerts
 
 
+  const loadedHash = loadHashMapFromLocalStorage();
