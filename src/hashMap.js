@@ -81,5 +81,3 @@ export class HashMap {
   }
 }
 
-const saved = localStorage.getItem("hashMap");
-export const loadedHash = HashMap.fromJSON(saved);

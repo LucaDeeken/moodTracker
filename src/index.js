@@ -34,3 +34,4 @@ export function loadHashMapFromLocalStorage() {
 
 
   const loadedHash = loadHashMapFromLocalStorage();
+  console.log(loadedHash);

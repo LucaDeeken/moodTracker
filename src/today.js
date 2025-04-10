@@ -9,7 +9,9 @@ export function DOMtoday() {
         const checkBoxes = document.getElementsByClassName("inputCheckBox");
         const checkBoxArray = Array.from(checkBoxes);
         const selectedBox = checkBoxArray.find(checkBox => checkBox.checked === true);
+
         newHash.set(selectedBox.value);
+        console.log(newHash);
     
       });
     
