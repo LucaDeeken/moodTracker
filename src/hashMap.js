@@ -58,8 +58,11 @@ export class HashMap {
     const checkYear = hash.slice(0, 4);
     const checkMonth = hash.slice(4);
     const yearArray = this.array.find((obj) => obj.year === checkYear);
+    console.log(todayString);
     const dayAlreadyThere = yearArray.date[checkMonth-1].find((obj) => obj.date === todayString);
+    console.log(dayAlreadyThere);
     if(dayAlreadyThere!=undefined) {
+      console.log("yo");
       dayAlreadyThere.mood = mood;
     } else {
       yearArray.date[checkMonth-1].push(key);

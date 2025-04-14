@@ -7,7 +7,7 @@ import { DOMtoday, getTodayHTML} from "./today.js";
 const statsBtn = document.getElementById("statisticsText");
 const todayBtn = document.getElementById("todayText");
 
-export const newHash = new HashMap();
+export let newHash = new HashMap();
 DOMtoday();
 
 todayBtn.addEventListener("click", () => {
@@ -22,14 +22,17 @@ statsBtn.addEventListener("click", () => {
 export function loadHashMapFromLocalStorage() {
     const saved = localStorage.getItem("hashMap");
     
-    if (saved) {
-      const loadedHash = HashMap.fromJSON(saved); // Lade HashMap
-      return loadedHash;
-    } else {
-      return null; // Keine Daten im LocalStorage gefunden
-    }
-  }
-  
+if (saved) {
+  newHash = HashMap.fromJSON(saved);
+  console.log("🔁 HashMap aus localStorage geladen", newHash);
+  return newHash;
+} else {
+  newHash = new HashMap();
+  console.log("🆕 Neue HashMap erzeugt", newHash);
+  return newHash;
+}
+}
+
   // Aufruf der Funktion und Speichern des Rückgabewerts
 
 
