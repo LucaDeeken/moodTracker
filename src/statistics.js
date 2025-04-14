@@ -1,7 +1,7 @@
 import { loadedHash, HashMap } from "./hashMap.js";
 import { loadHashMapFromLocalStorage } from "./index.js";
-import arrowLeft from './images/arrowLeft.png';
-import arrowRight from './images/arrowRight.png';
+import arrowLeft from "./images/arrowLeft.png";
+import arrowRight from "./images/arrowRight.png";
 
 export function getStats() {
   const mainArea = document.querySelector(".mainArea");
@@ -36,7 +36,7 @@ function getMonthlyStats(loadedHash) {
     Object.values(obj).includes(year),
   );
   for (const dayObject of found.date[month]) {
-    allStats.push(dayObject.mood); // Wert des Tagesobjekts hinzufügen
+    allStats.push(dayObject); // Wert des Tagesobjekts hinzufügen
   }
   return allStats;
 }
@@ -44,12 +44,50 @@ function getMonthlyStats(loadedHash) {
 function getGridsOnField(data) {
   const lengthOfArr = data.length;
   const statisticFieldDOM = document.getElementById("statisticField");
-  console.log(statisticFieldDOM);
-  for (let i = 0; i < 31; i++) {
+
+  for (let i = 0; i < lengthOfArr; i++) {
     const newDiv = document.createElement("div");
     statisticFieldDOM.appendChild(newDiv);
     const ele = data.shift();
-    newDiv.textContent = (i+1) + "th";
+    let dayNum = ele.date;
+    dayNum = Number(dayNum.split(".")[0]);
+    newDiv.textContent = dayNum + 1 + "th";
     newDiv.classList.add("statsField");
+    translateEmotionToColor(ele.mood, newDiv);;
+  }
+}
+
+function translateEmotionToColor(mood, newDiv) {
+  switch (mood) {
+    case "terror":
+      newDiv.classList.add("bg-farbe-1");
+      break;
+    case "depressed":
+      newDiv.classList.add("bg-farbe-2");
+      break;
+    case "veryBad":
+      newDiv.classList.add("bg-farbe-3");
+      break;
+    case "bad":
+      newDiv.classList.add("bg-farbe-4");
+      break;
+    case "discontent":
+      newDiv.classList.add("bg-farbe-5");
+      break;
+    case "okay":
+      newDiv.classList.add("bg-farbe-6");
+      break;
+    case "fine":
+      newDiv.classList.add("bg-farbe-7");
+      break;
+    case "good":
+      newDiv.classList.add("bg-farbe-8");
+      break;
+    case "veryGood":
+      newDiv.classList.add("bg-farbe-9");
+      break;
+    case "godlike":
+      newDiv.classList.add("bg-farbe-10");
+      break;
   }
 }
