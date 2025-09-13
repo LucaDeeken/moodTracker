@@ -6,10 +6,10 @@ export class Key {
 }
 //builds default HashMap for 2025
 export class HashMap {
-  constructor() {
+  constructor(yearNum) {
     this.array = [];
     const year = {
-      year: "2025", // Name des Arrays
+      year: yearNum, // Name des Arrays
       date: [], // Das eigentliche Array
     };
     this.array.push(year);
