@@ -494,7 +494,7 @@ input[type="checkbox"] {
 @media (max-width: 575px) {
 
 #outerLayout {
-  grid-template-rows: 0.3fr 1fr 0.5fr;
+  grid-template-rows: 0.35fr 1fr 0.5fr;
 }
 
 
