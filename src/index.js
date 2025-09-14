@@ -11,11 +11,21 @@ const todayBtn = document.getElementById("todayText");
 DOMtoday();
 
 todayBtn.addEventListener("click", () => {
+  const statisticFieldDOM = document.getElementById("statisticField");
+  if(statisticFieldDOM==null) {
+    return;
+  } else {
     getTodayHTML();
+  }
 })
 
 statsBtn.addEventListener("click", () => {
+  const statisticFieldDOM = document.getElementById("statisticField");
+  if(statisticFieldDOM==null) {
     getStats();
+  } else {
+    return;
+  }
 })
 
 

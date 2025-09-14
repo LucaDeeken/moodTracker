@@ -456,6 +456,11 @@ input[type="checkbox"] {
 
 @media (max-width: 790px) {
 
+  #outerLayout {
+  grid-template-rows: 160px 1fr 0.5fr;
+}
+
+
   .statsField {
     height: 50px;
     width: 50px;
@@ -493,9 +498,6 @@ input[type="checkbox"] {
 
 @media (max-width: 575px) {
 
-#outerLayout {
-  grid-template-rows: 0.35fr 1fr 0.5fr;
-}
 
 
   #checkBoxes {
