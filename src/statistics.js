@@ -5,12 +5,14 @@ import arrowRight from "./images/arrowRight.png";
 
 export function getStats() {
   const mainArea = document.querySelector(".mainArea");
+  const doneImage = document.querySelector(".doneImage");
   const textContainer = document.getElementById("textContainerToday");
   const form = document.getElementById("checkBoxes");
   const sbmbtn = document.getElementById("btnContainer");
   textContainer.classList.add("fade-out");
   form.classList.add("fade-out");
   sbmbtn.classList.add("fade-out");
+  doneImage.classList.add("disappear");
 
   setTimeout(function () {
     mainArea.id = "";
@@ -118,41 +120,34 @@ function getGridsOnField(data) {
     dayNum = Number(dayNum.split(".")[0]);
     newDiv.textContent = dayNum + 1 + "th";
     newDiv.classList.add("statsField");
-    translateEmotionToColor(ele.mood, newDiv);;
+    const colorOfMood = translateEmotionToColor(ele.mood);
+    newDiv.classList.add(colorOfMood);
+    const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
+    newDiv.style.backgroundColor = color;
   }
 }
 
-function translateEmotionToColor(mood, newDiv) {
+export function translateEmotionToColor(mood) {
   switch (mood) {
     case "terror":
-      newDiv.classList.add("bg-farbe-1");
-      break;
+      return "bg-farbe-1";
     case "depressed":
-      newDiv.classList.add("bg-farbe-2");
-      break;
+      return "bg-farbe-2";
     case "veryBad":
-      newDiv.classList.add("bg-farbe-3");
-      break;
+      return "bg-farbe-3";
     case "bad":
-      newDiv.classList.add("bg-farbe-4");
-      break;
+      return "bg-farbe-4";
     case "discontent":
-      newDiv.classList.add("bg-farbe-5");
-      break;
+      return "bg-farbe-5";
     case "okay":
-      newDiv.classList.add("bg-farbe-6");
-      break;
+      return "bg-farbe-6";
     case "fine":
-      newDiv.classList.add("bg-farbe-7");
-      break;
+      return "bg-farbe-7";
     case "good":
-      newDiv.classList.add("bg-farbe-8");
-      break;
+      return "bg-farbe-8";
     case "veryGood":
-      newDiv.classList.add("bg-farbe-9");
-      break;
+      return "bg-farbe-9";
     case "godlike":
-      newDiv.classList.add("bg-farbe-10");
-      break;
+      return "bg-farbe-10";
   }
 }
