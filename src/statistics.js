@@ -3,7 +3,7 @@ import { newHash, loadHashMapFromLocalStorage } from "./index.js";
 import arrowLeft from "./images/arrowLeft.png";
 import arrowRight from "./images/arrowRight.png";
 
-export function getStats() {
+export function getStats(comingFromToday) {
   const mainArea = document.querySelector(".mainArea");
   const doneImage = document.querySelector(".doneImage");
   const textContainer = document.getElementById("textContainerToday");
@@ -22,7 +22,7 @@ export function getStats() {
 <p id="monthName"></p><img src="${arrowRight}" alt="" aria-label="Show next month" id="arrowRight"></div><div id="statisticsBorder"><div id="statisticField"></div></div>`;
     if (newHash != null) {
       const tableContent = loadToday(newHash);
-      getGridsOnField(tableContent);
+      getGridsOnField(tableContent, comingFromToday);
       console.log(newHash);
     }
     const arrowLeftELe = document.getElementById("arrowLeft");
@@ -68,8 +68,9 @@ function loadToday(newHash) {
   return allStats;
 }
 
-function moveMonthBack(monthVar, yearVar, newHash) {
+function moveMonthBack(monthVar, yearVar, newHash, comingFromToday) {
 
+  const comingFromTodayField = false;
   month = month-1;
   if(month<0) {
     year = year - 1;
@@ -77,7 +78,7 @@ function moveMonthBack(monthVar, yearVar, newHash) {
   }
   const monthText = getMonthName(month);
   const allStats = getMonthlyStats(yearVar, month, newHash);
-  getGridsOnField(allStats);
+  getGridsOnField(allStats, comingFromTodayField);
   const monthName = document.getElementById("monthName");
   
   monthName.textContent = monthText;
@@ -86,6 +87,7 @@ function moveMonthBack(monthVar, yearVar, newHash) {
 
 function moveMonthNext(monthVar, yearVar, newHash) {
 
+  const comingFromTodayArea = false;
   month = month+1;
   if(month>12) {
     year = year + 1;
@@ -94,7 +96,7 @@ function moveMonthNext(monthVar, yearVar, newHash) {
   const monthText = getMonthName(month);
 
   const allStats = getMonthlyStats(yearVar, month, newHash);
-  getGridsOnField(allStats);
+  getGridsOnField(allStats, comingFromTodayArea);
   const monthName = document.getElementById("monthName");
   monthName.textContent = monthText;
   console.log(month);
@@ -107,7 +109,7 @@ function getMonthName(monthNumber, locale = "de-DE") {
 }
 
 
-function getGridsOnField(data) {
+function getGridsOnField(data, comingFromToday) {
   const lengthOfArr = data.length;
   const statisticFieldDOM = document.getElementById("statisticField");
   statisticFieldDOM.innerHTML = "";
@@ -119,11 +121,17 @@ function getGridsOnField(data) {
     let dayNum = ele.date;
     dayNum = Number(dayNum.split(".")[0]);
     newDiv.textContent = dayNum + 1 + "th";
-    newDiv.classList.add("statsField");
+        if(comingFromToday) {
+      newDiv.classList.add("statsField");
+    } else {
+      newDiv.classList.add("statsFieldFromMonth");
+    }
+    
     const colorOfMood = translateEmotionToColor(ele.mood);
     newDiv.classList.add(colorOfMood);
     const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
     newDiv.style.backgroundColor = color;
+newDiv.classList.add(".appear");
   }
 }
 

@@ -7,7 +7,6 @@ import { DOMtoday, getTodayHTML} from "./today.js";
 const statsBtn = document.getElementById("statisticsText");
 const todayBtn = document.getElementById("todayText");
 
-
 DOMtoday();
 
 todayBtn.addEventListener("click", () => {
@@ -21,8 +20,9 @@ todayBtn.addEventListener("click", () => {
 
 statsBtn.addEventListener("click", () => {
   const statisticFieldDOM = document.getElementById("statisticField");
+  const comingFromToday = true;
   if(statisticFieldDOM==null) {
-    getStats();
+    getStats(comingFromToday);
   } else {
     return;
   }

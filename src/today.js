@@ -2,6 +2,15 @@
 import { newHash} from "./index.js";
 import {translateEmotionToColor} from "./statistics.js"
 
+
+import terror from "./images/terror.png"
+import depressedImg from "./images/depressed.png"
+import veryBad from "./images/veryBad.png"
+import bad from "./images/bad.png"
+
+import veryGoodImg from './images/veryGood.png';
+
+
 let alreadyClickedSubmit = false;
 
 export function DOMtoday() {
@@ -31,11 +40,13 @@ export function DOMtoday() {
               textToday.classList.remove("fade-out");
               textToday.classList.add("fade-in");
               setTimeout(()=> textToday.classList.remove("fade-in"), 400);
-            }, 400);
+            }, 300);
 
 
           submitButton.textContent = "Edit";
           const doneIcon = document.querySelector(".doneImage");
+          const sourceOfImg = pictureByMood(selectedBox.value);
+          doneIcon.src = sourceOfImg;
           checkBox.style.display = "none";
           doneIcon.style.display = "block";
           doneIcon.style.opacity = 1;
@@ -69,25 +80,50 @@ function pulseCheckbox(mood) {
 function textByMood(mood) {
   switch (mood) {
     case "terror":
-      return "Chaos everywhere, it’s okay to crumble. You've got this."
+      return "Dark times. Hang in there! ❤️"
       case "depressed":
-      return "Gentle hug for you - you don’t have to be strong today."
+      return "Gentle hug for you. No need to be strong today."
       case "veryBad":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "What a crappy day, huh? Tomorrow will be better!"
       case "bad":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "Today sucked. But it could’ve been worse."
       case "discontent":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "Just another pointless-feeling day."
       case "okay":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "An okay day. Nothing great, nothing terrible."
       case "fine":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "A simple day, and honestly, not too bad!"
       case "good":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "Feels good to know, you had a great day!"
       case "veryGood":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "Today sounds wonderful — I’m glad!"
       case "godlike":
-      return "Imagine a gentle hug around you. You don’t have to be strong today"
+      return "God-tier day unlocked — achievement complete!"
+  }
+}
+
+function pictureByMood(mood) {
+  switch (mood) {
+    case "terror":
+      return terror
+      case "depressed":
+      return depressedImg
+      case "veryBad":
+      return veryBad
+      case "bad":
+      return bad
+      case "discontent":
+      return "Just another pointless-feeling day."
+      case "okay":
+      return "An okay day. Nothing great, nothing terrible."
+      case "fine":
+      return "A simple day, and honestly, not too bad!"
+      case "good":
+      return "Feels good to know, you had a great day!"
+      case "veryGood":
+      return veryGoodImg
+      case "godlike":
+      return "God-tier day unlocked — achievement complete!"
   }
 }
 
