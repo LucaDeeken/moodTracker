@@ -576,7 +576,7 @@ input[type="checkbox"] {
 }
 
 
-  .statsField {
+  .statsField,.statsFieldFromMonth {
     height: 50px;
     width: 50px;
   }
@@ -639,7 +639,7 @@ input[type="checkbox"] {
 }
 
 
-  .statsField {
+  .statsField,.statsFieldFromMonth {
     height: 45px;
     width: 45px;
   }
@@ -674,7 +674,7 @@ input[type="checkbox"] {
     margin-right: 1rem;
   }
 
-  .statsField {
+  .statsField,.statsFieldFromMonth {
     height: 33px;
     width: 33px;
   }
