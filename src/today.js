@@ -7,7 +7,7 @@ import terror from "./images/terror.png"
 import depressedImg from "./images/depressed.png"
 import veryBad from "./images/veryBad.png"
 import bad from "./images/bad.png"
-
+import discontent from "./images/discontent.png"
 import veryGoodImg from './images/veryGood.png';
 
 
@@ -84,13 +84,13 @@ function textByMood(mood) {
       case "depressed":
       return "Gentle hug for you. No need to be strong today."
       case "veryBad":
-      return "What a crappy day, huh? Tomorrow will be better!"
-      case "bad":
       return "Today sucked. But it could’ve been worse."
-      case "discontent":
+      case "bad":
       return "Just another pointless-feeling day."
+      case "discontent":
+      return "Another day of slightly underwhelming adulting."
       case "okay":
-      return "An okay day. Nothing great, nothing terrible."
+      return "A day that’s… okay, I guess."
       case "fine":
       return "A simple day, and honestly, not too bad!"
       case "good":
@@ -113,7 +113,7 @@ function pictureByMood(mood) {
       case "bad":
       return bad
       case "discontent":
-      return "Just another pointless-feeling day."
+      return discontent
       case "okay":
       return "An okay day. Nothing great, nothing terrible."
       case "fine":

@@ -221,7 +221,7 @@ body {
 .doneImage {
   opacity: 0;
   display: none;
-  width: 180px;
+  width: 130px;
   justify-self: center;
   align-self: center;
   animation: 1.5s fadeIn;
