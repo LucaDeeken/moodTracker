@@ -97,7 +97,7 @@ body {
 
 #outerLayout {
   display: grid;
-  grid-template-rows: 200px 1fr 0.1fr;
+  grid-template-rows: 190px 1fr 0.1fr;
   height: 100%;
 }
 
@@ -221,7 +221,7 @@ body {
 .doneImage {
   opacity: 0;
   display: none;
-  width: 130px;
+  width: 150px;
   justify-self: center;
   align-self: center;
   animation: 1.5s fadeIn;
@@ -613,7 +613,9 @@ input[type="checkbox"] {
 
 @media (max-width: 575px) {
 
-
+  #outerLayout {
+  grid-template-rows: 140px 1fr 0.5fr;
+}
 
   #checkBoxes {
     margin-left: 1rem;
@@ -661,6 +663,10 @@ input[type="checkbox"] {
 }    
 
 @media (max-width: 430px) {
+
+  #outerLayout {
+  grid-template-rows: 130px 1fr 0.5fr;
+}
 
   #mainAreaToday {
     grid-template-rows: 90px 2fr 0.8fr;
