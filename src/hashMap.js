@@ -59,13 +59,15 @@ export class HashMap {
     const checkMonth = hash.slice(4);
     const yearArray = this.array.find((obj) => obj.year === checkYear);
     console.log(todayString);
-    const dayAlreadyThere = yearArray.date[checkMonth-1].find((obj) => obj.date === todayString);
+    const dayAlreadyThere = yearArray.date[checkMonth - 1].find(
+      (obj) => obj.date === todayString,
+    );
     console.log(dayAlreadyThere);
-    if(dayAlreadyThere!=undefined) {
+    if (dayAlreadyThere != undefined) {
       console.log("yo");
       dayAlreadyThere.mood = mood;
     } else {
-      yearArray.date[checkMonth-1].push(key);
+      yearArray.date[checkMonth - 1].push(key);
     }
   }
   //generates a variable that contains today's date
@@ -83,4 +85,3 @@ export class HashMap {
     return newHash;
   }
 }
-

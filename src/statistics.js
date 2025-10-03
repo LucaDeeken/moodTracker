@@ -33,27 +33,24 @@ export function getStats(comingFromToday) {
     monthName.textContent = monthText;
     arrowLeftELe.addEventListener("click", () => {
       moveMonthBack(month, year, newHash);
-    })
+    });
     arrowRightELe.addEventListener("click", () => {
       moveMonthNext(month, year, newHash);
-    })
+    });
   }, 500);
   return newHash;
 }
 
 function getMonthlyStats(year, month, newHash) {
   let allStats = [];
- 
-  const monthMinusOne = month -1
-  const found = newHash.array.find((obj) =>
-    Object.values(obj).includes(year),
-  );
+
+  const monthMinusOne = month - 1;
+  const found = newHash.array.find((obj) => Object.values(obj).includes(year));
   for (const dayObject of found.date[monthMinusOne]) {
     allStats.push(dayObject); // Wert des Tagesobjekts hinzufügen
   }
   return allStats;
 }
-
 
 let month = 0;
 let year = 0;
@@ -61,7 +58,7 @@ let year = 0;
 function loadToday(newHash) {
   let todayDate = new Date();
   year = todayDate.getFullYear();
-  month = (todayDate.getMonth())+1;
+  month = todayDate.getMonth() + 1;
   console.log(month);
   year = String(year);
   const allStats = getMonthlyStats(year, month, newHash);
@@ -69,10 +66,9 @@ function loadToday(newHash) {
 }
 
 function moveMonthBack(monthVar, yearVar, newHash, comingFromToday) {
-
   const comingFromTodayField = false;
-  month = month-1;
-  if(month<0) {
+  month = month - 1;
+  if (month < 0) {
     year = year - 1;
     month = 12;
   }
@@ -80,16 +76,15 @@ function moveMonthBack(monthVar, yearVar, newHash, comingFromToday) {
   const allStats = getMonthlyStats(yearVar, month, newHash);
   getGridsOnField(allStats, comingFromTodayField);
   const monthName = document.getElementById("monthName");
-  
+
   monthName.textContent = monthText;
   return allStats;
 }
 
 function moveMonthNext(monthVar, yearVar, newHash) {
-
   const comingFromTodayArea = false;
-  month = month+1;
-  if(month>12) {
+  month = month + 1;
+  if (month > 12) {
     year = year + 1;
     month = 1;
   }
@@ -104,10 +99,10 @@ function moveMonthNext(monthVar, yearVar, newHash) {
 }
 
 function getMonthName(monthNumber, locale = "de-DE") {
-  return new Intl.DateTimeFormat(locale, { month: "long" })
-    .format(new Date(2000, monthNumber - 1, 1));
+  return new Intl.DateTimeFormat(locale, { month: "long" }).format(
+    new Date(2000, monthNumber - 1, 1),
+  );
 }
-
 
 function getGridsOnField(data, comingFromToday) {
   const lengthOfArr = data.length;
@@ -121,17 +116,17 @@ function getGridsOnField(data, comingFromToday) {
     let dayNum = ele.date;
     dayNum = Number(dayNum.split(".")[0]);
     newDiv.textContent = dayNum + 1 + "th";
-        if(comingFromToday) {
+    if (comingFromToday) {
       newDiv.classList.add("statsField");
     } else {
       newDiv.classList.add("statsFieldFromMonth");
     }
-    
+
     const colorOfMood = translateEmotionToColor(ele.mood);
     newDiv.classList.add(colorOfMood);
     const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
     newDiv.style.backgroundColor = color;
-newDiv.classList.add(".appear");
+    newDiv.classList.add(".appear");
   }
 }
 
