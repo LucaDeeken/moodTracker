@@ -14,6 +14,29 @@ import good from './images/good.png';
 import veryGoodImg from './images/veryGood.png';
 import godlike from './images/godlike.png';
 
+const moodImages = [
+  terror,
+  depressedImg,
+  veryBad,
+  bad,
+  discontent,
+  okay,
+  fine,
+  good,
+  veryGoodImg,
+  godlike
+];
+
+function preloadImages(imgArray) {
+  imgArray.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
+}
+
+preloadImages(moodImages);
+
+
 let alreadyClickedSubmit = false;
 let doneIcon = "";
 export function DOMtoday() {
