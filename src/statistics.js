@@ -115,7 +115,7 @@ function getGridsOnField(data, comingFromToday) {
     const ele = data.shift();
     let dayNum = ele.date;
     dayNum = Number(dayNum.split(".")[0]);
-    newDiv.textContent = dayNum + 1 + "th";
+    newDiv.textContent = dayNum + "th";
     if (comingFromToday) {
       newDiv.classList.add("statsField");
     } else {
