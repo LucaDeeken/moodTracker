@@ -517,36 +517,16 @@ input[type="checkbox"] {
   }
 }
 
-.bg-farbe-1 {
-  --farbe: #8b0000;
-}
-.bg-farbe-2 {
-  --farbe: #b22222;
-}
-.bg-farbe-3 {
-  --farbe: #dc143c;
-}
-.bg-farbe-4 {
-  --farbe: #ff7f50;
-}
-.bg-farbe-5 {
-  --farbe: #ffa500;
-}
-.bg-farbe-6 {
-  --farbe: #ffff00;
-}
-.bg-farbe-7 {
-  --farbe: #d9ff2f;
-}
-.bg-farbe-8 {
-  --farbe: #adff2f;
-}
-.bg-farbe-9 {
-  --farbe: #32cd32;
-}
-.bg-farbe-10 {
-  --farbe: #228b22;
-}
+.bg-farbe-1  { --farbe: #e20303; } 
+.bg-farbe-2  { --farbe: #f75318; } 
+.bg-farbe-3  { --farbe: #fa9725; } 
+.bg-farbe-4  { --farbe: #fdbd0f; } 
+.bg-farbe-5  { --farbe: #ffe833; } 
+.bg-farbe-6  { --farbe: #f4f94a; } 
+.bg-farbe-7  { --farbe: #d8f56b; } 
+.bg-farbe-8  { --farbe: #b5f566; } 
+.bg-farbe-9  { --farbe: #7ee65a; } 
+.bg-farbe-10 { --farbe: #3fd63c; }
 
 @media (max-width: 940px) {
   #todayText {
