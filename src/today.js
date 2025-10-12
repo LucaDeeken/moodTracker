@@ -1,6 +1,8 @@
 import { newHash } from "./index.js";
 import { translateEmotionToColor } from "./statistics.js";
 
+import notesImg from "./images/notes.png";
+
 import terror from "./images/terror.png";
 import depressedImg from "./images/depressed.png";
 import veryBad from "./images/veryBad.png";
@@ -252,6 +254,9 @@ function loadTodayHTMLDone() {
               <input type="checkbox" name="option1" value="godlike" class="inputCheckBox">
             </label>
           </div>
+                    <div class="notesDiv">
+             <img src="${notesImg}" alt="Notes" aria-label="add notes" class="notesImg" />
+          </div>
         </form>
         <div id="btnContainer">
           <button type="submit" form="checkBoxes" id="submitBtn">Edit</button>
@@ -385,6 +390,9 @@ function loadTodayHTMLNew() {
             />
           </label>
         </div>
+                  <div class="notesDiv">
+             <img src="${notesImg}" alt="Notes" aria-label="add notes" class="notesImg" />
+          </div>
       </form>
       <div id="btnContainer">
         <button type="submit" form="checkBoxes" id="submitBtn">Submit</button>
