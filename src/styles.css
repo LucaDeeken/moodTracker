@@ -76,6 +76,18 @@ h6 {
   isolation: isolate;
 }
 
+
+.zeroOpacity {
+
+  opacity: 0;
+}
+
+.oneOpacity {
+
+  opacity: 1;
+}
+
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -373,8 +385,6 @@ input[type="checkbox"] {
 .notesDiv {
   position: absolute;
   bottom: -85px;
-   opacity: 0; /* Start mit unsichtbarem Zustand */
-  animation: fadeIn 2s cubic-bezier(0.25, 0.8, 0.25, 1) 0.5s forwards; /* 1s Verzögerung und beschleunigte Animation */
 }
 
 .notesImg {
@@ -387,6 +397,140 @@ input[type="checkbox"] {
   cursor: pointer;
 }
 
+
+/* NOTES AREA */
+
+.notesFormTransitionComing {
+  transition: opacity 0.5s ease;
+}
+
+.notesForm {
+  grid-row: 2/3;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  padding: 15px;
+  row-gap: 25px;
+}
+
+.notesForm.disappear {
+animation: disappear 0.5s forwards;
+}
+#checkBoxes.disappear {
+animation: disappear 0.5s forwards;
+}
+#btnContainer.disappear {
+animation: disappear 0.5s forwards;
+}
+
+.notesForm.appear {
+animation: fadeIn 0.5s forwards;
+}
+#checkBoxes.appear {
+animation: fadeIn 0.5s forwards;
+}
+#btnContainer.appear {
+animation: fadeIn 0.5s forwards;
+}
+
+
+
+.notesForm section {
+  display: grid;
+  row-gap: 15px;
+  font-size: 20px;
+  font-weight: 700;
+  row-gap: 15px;
+}
+
+
+.notesLabel {
+  display: block;
+  text-align: center;
+  color: #313350;
+}
+
+.notesInputDiv {
+    display: grid;
+  justify-content: center;
+  row-gap: 5px;
+}
+
+.notesCheckboxDiv {
+  display: grid;
+  row-gap: 5px;
+}
+
+#notesInput {
+  font-size: 16px;
+  height: 120px;
+  width: 500px;
+  background-color: #d6e9fc;
+  border: 2px solid rgb(189, 188, 188);
+  padding: 15px;
+  border-radius: 15px;
+  resize: none;
+}
+
+.notesCheckboxLabel {
+  display: block;
+  text-align: center;
+  color: #313350;
+}
+
+.notesCheckboxInputDiv {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+#inputCheckbox {
+ width: 380px;
+ font-size: 16px;
+ background-color: #d6e9fc;
+ border: 2px solid rgb(189, 188, 188);
+ padding: 8px;
+ border-radius: 12px;
+}
+
+#notesCheckbox {
+  transform: scale(2.5);
+  margin-right: 10px;
+}
+
+.notesButtonDiv {
+  grid-row: 3/4;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.notesCancelBtn, .notesSubmitBtn {
+  background-color: #dbdbdb;
+  color: black;
+  font-weight: 700;
+  height: 50px;
+  width: 100px;
+  border: none;
+  border-radius: 15px;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.notesCancelBtn:hover, .notesSubmitBtn:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #f8f9fa;
+}
+
+.notesSubmitBtn:hover {
+background-color: #28a745;
+}
+
+.notesCancelBtn:hover {
+background-color: #dc3545;
+}
+
+/* adsf */
 #submitBtn:hover {
   background-color: #1b8620; /* Intensiveres Grün beim Hovern */
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3); /* Tieferer Schatten */
@@ -634,6 +778,11 @@ input[type="checkbox"] {
     margin-left: 1rem;
     margin-right: 1rem;
   }
+
+  .notesImg {
+   height: 44px;
+   margin: 5px;
+}
 
   #mainAreaToday {
     grid-template-rows: 90px 2fr 0.6fr;

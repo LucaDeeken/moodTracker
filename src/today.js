@@ -98,6 +98,10 @@ export function DOMtoday() {
       }
     });
   });
+  const notesButton = document.querySelector(".notesImg");
+notesButton.addEventListener("click", () => {
+  openNotesModule();
+}, { once: true });
 }
 
 function pulseCheckbox(mood) {
@@ -397,4 +401,156 @@ function loadTodayHTMLNew() {
       <div id="btnContainer">
         <button type="submit" form="checkBoxes" id="submitBtn">Submit</button>
       </div>`;
+}
+
+
+function openNotesModule () {
+
+  const checkBoxForm = document.querySelector("#checkBoxes");
+  const btnContainer = document.querySelector("#btnContainer");
+  const textHeader = document.querySelector("#textToday");
+
+  const textHeaderContent = textHeader.textContent;
+  checkBoxForm.classList.add("disappear");
+  btnContainer.classList.add("disappear");
+  
+  //Text Header Switch and Animation
+  setTimeout(() => {
+    textHeader.classList.add("fade-out");
+    setTimeout(() => {
+      textHeader.textContent = "What's on your mind?";
+      textHeader.classList.remove("fade-out");
+      textHeader.classList.add("fade-in");
+      setTimeout(() => textHeader.classList.remove("fade-in"), 700);
+    }, 700);
+    })
+
+
+
+
+  //Animation
+  setTimeout(() => {
+    checkBoxForm.style.display = "none";
+    btnContainer.style.display = "none";
+    checkBoxForm.classList.add("zeroOpacity");
+    btnContainer.classList.add("zeroOpacity");
+    checkBoxForm.classList.remove("disappear");
+    btnContainer.classList.remove("disappear");
+  }, 700); 
+  
+
+  
+  //NoteInput Fields
+  const notesForm = document.createElement("div");
+  notesForm.classList.add("zeroOpacity");
+  notesForm.classList.add("notesFormTransitionComing");
+  setTimeout(() => {
+
+  textHeader.classList.remove("fade-in");
+  checkBoxForm.insertAdjacentElement("afterend", notesForm);
+  notesForm.classList.add("notesForm");
+  notesForm.innerHTML = `
+  <section>
+  <div class="notesInputDiv">
+    <label for="notesInput" class="notesLabel">Notes:</label>
+    <textarea id="notesInput" placeholder="What would you like to remember?" form="checkBoxes"></textarea>
+  </div>
+  <div class="notesCheckboxDiv">
+    <label for="notesCheckbox" class="notesCheckboxLabel">Done?</label>
+    <div class="notesCheckboxInputDiv">
+     <input id="inputCheckbox" placeholder="Enter what this checkbox represents..." >
+     <input type="checkbox" id="notesCheckbox" name="activity" value="sport">
+     </div>
+  </div>
+  </section>
+  <div class="notesButtonDiv">
+  <button class="notesCancelBtn">Cancel</button>
+  <button class="notesSubmitBtn">Submit</button>
+  </div>
+  `;
+
+  const notesSubmitBtn = document.querySelector(".notesSubmitBtn");
+  notesSubmitBtn.addEventListener("click", () => {
+    closeNotesModul(textHeaderContent);
+  })
+
+  const notesCancelBtn = document.querySelector(".notesCancelBtn");
+  notesCancelBtn.addEventListener("click", () => {
+    closeNotesModul(textHeaderContent);
+  })
+
+  }, 600);
+
+
+  setTimeout(() => {
+    notesForm.classList.remove("zeroOpacity");
+    
+    notesForm.classList.add("appear");
+    notesForm.classList.remove("notesFormTransitionComing");
+
+    setTimeout(() => {
+      notesForm.classList.remove("appear");
+    }, 200);
+  }, 700);
+}
+
+function closeNotesModul (textHeaderContent) {
+
+  const notesForm = document.querySelector(".notesForm");
+  const textHeader = document.querySelector("#textToday");
+
+  //Text Header Switch and Animation
+  setTimeout(() => {
+    textHeader.classList.add("fade-out");
+    setTimeout(() => {
+      textHeader.textContent = textHeaderContent;
+      textHeader.classList.remove("fade-out");
+      textHeader.classList.add("fade-in");
+      setTimeout(() => textHeader.classList.remove("fade-in"), 700);
+    }, 700);
+    })
+
+
+
+
+
+  notesForm.classList.add("disappear");
+  //Animation
+  setTimeout(() => {
+
+    notesForm.classList.add("zeroOpacity"); 
+    notesForm.style.display = "none";
+  }, 300); 
+  
+  const checkBoxes = document.querySelector("#checkBoxes");
+  const buttonContainer = document.querySelector("#btnContainer");
+  checkBoxes.style.display = "grid";
+  buttonContainer.style.display = "grid";
+  //NoteInput Fields
+  // const checkBoxForm = document.querySelector("#checkBoxes");
+  // checkBoxForm.style.opacity = 0;
+
+
+
+  setTimeout(() => {
+
+  checkBoxes.classList.add("appear");
+  buttonContainer.classList.add("appear");
+  checkBoxes.classList.remove("zeroOpacity");
+  buttonContainer.classList.remove("zeroOpacity");
+  
+
+  setTimeout(() => {
+    checkBoxes.classList.remove("appear");
+    buttonContainer.classList.remove("appear");
+    
+    //enable notesButton again
+    const notesButton = document.querySelector(".notesImg");
+    notesButton.addEventListener("click", () => {
+      openNotesModule();
+    }, { once: true });
+
+  }, 1000);
+  }, 700);
+
 }
