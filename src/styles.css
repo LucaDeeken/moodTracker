@@ -188,7 +188,7 @@ body {
   display: grid;
   grid-template-rows: 100px 1.5fr 0.6fr;
   transition: transform 0.5s ease;
-  max-height: 475px;
+  height: 475px;
 }
 
 #textContainerToday {
