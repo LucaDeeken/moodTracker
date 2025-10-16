@@ -38,11 +38,11 @@ preloadImages(moodImages);
 
 let alreadyClickedSubmit = false;
 let doneIcon = "";
-let mood ="";
+let mood = "";
 export function DOMtoday() {
-  document
-    .getElementById("checkBoxes")
-    .addEventListener("submit", function (event) {
+  document.getElementById("checkBoxes").addEventListener(
+    "submit",
+    function (event) {
       event.preventDefault();
       alreadyClickedSubmit = true;
       const checkBoxes = document.getElementsByClassName("inputCheckBox");
@@ -75,18 +75,32 @@ export function DOMtoday() {
         doneIcon.style.display = "block";
         doneIcon.style.opacity = 1;
 
-        submitButton.addEventListener("click", () => {
-          alreadyClickedSubmit = false;
-          loadTodayHTMLNew();
-          DOMtoday();
-      });
+        submitButton.addEventListener(
+          "click",
+          (event) => {
+            event.preventDefault();
+            alreadyClickedSubmit = false;
 
+            const textToday = document.querySelector("#textToday");
+            const doneImage = document.querySelector(".doneImage");
 
-
-
+            doneImage.classList.add("disappear");
+            setTimeout(() => {
+              textToday.classList.add("fade-out");
+              setTimeout(() => {
+                textToday.classList.remove("fade-out");
+                loadTodayHTMLNew();
+                DOMtoday();
+              }, 400);
+            }, 600);
+          },
+          { once: true },
+        );
       }, 2000);
       console.log(newHash);
-    });
+    },
+    { once: true },
+  );
 
   //only one checkbox should be checked
   document.querySelectorAll(".inputCheckBox").forEach((checkbox) => {
@@ -99,9 +113,13 @@ export function DOMtoday() {
     });
   });
   const notesButton = document.querySelector(".notesImg");
-notesButton.addEventListener("click", () => {
-  openNotesModule();
-}, { once: true });
+  notesButton.addEventListener(
+    "click",
+    () => {
+      openNotesModule();
+    },
+    { once: true },
+  );
 }
 
 function pulseCheckbox(mood) {
@@ -181,10 +199,27 @@ export function getTodayHTML() {
     } else {
       loadTodayHTMLDone();
       const submitBtn = document.getElementById("submitBtn");
-      submitBtn.addEventListener("click", () => {
-        loadTodayHTMLNew();
-        DOMtoday();
-      });
+      submitBtn.addEventListener(
+        "click",
+        (event) => {
+          event.preventDefault();
+          alreadyClickedSubmit = false;
+
+          const textToday = document.querySelector("#textToday");
+          const doneImage = document.querySelector(".doneImage");
+
+          doneImage.classList.add("disappear");
+          setTimeout(() => {
+            textToday.classList.add("fade-out");
+            setTimeout(() => {
+              textToday.classList.remove("fade-out");
+              loadTodayHTMLNew();
+              DOMtoday();
+            }, 400);
+          }, 600);
+        },
+        { once: true },
+      );
     }
 
     mainArea.id = "mainAreaToday";
@@ -194,10 +229,10 @@ export function getTodayHTML() {
 }
 
 function loadTodayHTMLDone() {
-        const mainArea = document.querySelector(".mainArea");
-        mainArea.innerHTML = "";
-        mainArea.id = "";
-        mainArea.innerHTML = `     <div id="textContainerToday">
+  const mainArea = document.querySelector(".mainArea");
+  mainArea.innerHTML = "";
+  mainArea.id = "";
+  mainArea.innerHTML = `     <div id="textContainerToday">
           <p id="textToday" class="">${mood}</p>
         </div>
         <img src=${doneIcon.src} alt="Done-Icon" class="doneImage" style="display: block; opacity: 1;">
@@ -269,11 +304,11 @@ function loadTodayHTMLDone() {
 
 function loadTodayHTMLNew() {
   const mainArea = document.querySelector(".mainArea");
-        mainArea.innerHTML = `     <div id="textContainerToday">
-        <p id="textToday">How are you feeling today, Luca?</p>
+  mainArea.innerHTML = `     <div id="textContainerToday">
+        <p id="textToday" class="fade-out">How are you feeling today, Luca?</p>
       </div>
-      <img src="./images/done.png" alt="Done-Icon" class="doneImage">
-      <form id="checkBoxes">
+      <img src="./images/done.png" alt="Done-Icon" class="doneImage" style="display:none">
+      <form id="checkBoxes" class="disappears">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           id="sad"
@@ -399,13 +434,25 @@ function loadTodayHTMLNew() {
           </div>
       </form>
       <div id="btnContainer">
-        <button type="submit" form="checkBoxes" id="submitBtn">Submit</button>
+        <button type="submit" form="checkBoxes" id="submitBtn">Edit</button>
       </div>`;
+  const textToday = document.querySelector("#textToday");
+  const checkBoxes = document.querySelector("#checkBoxes");
+  const buttonText = document.querySelector("#submitBtn");
+
+  setTimeout(() => {
+    textToday.classList.remove("fade-out");
+    textToday.classList.add("fade-in");
+    checkBoxes.classList.remove("disappears");
+    buttonText.textContent = "Submit";
+
+    setTimeout(() => {
+      textToday.classList.remove("fade-in");
+    }, 10);
+  }, 10);
 }
 
-
-function openNotesModule () {
-
+function openNotesModule() {
   const checkBoxForm = document.querySelector("#checkBoxes");
   const btnContainer = document.querySelector("#btnContainer");
   const textHeader = document.querySelector("#textToday");
@@ -413,7 +460,7 @@ function openNotesModule () {
   const textHeaderContent = textHeader.textContent;
   checkBoxForm.classList.add("disappear");
   btnContainer.classList.add("disappear");
-  
+
   //Text Header Switch and Animation
   setTimeout(() => {
     textHeader.classList.add("fade-out");
@@ -423,10 +470,7 @@ function openNotesModule () {
       textHeader.classList.add("fade-in");
       setTimeout(() => textHeader.classList.remove("fade-in"), 700);
     }, 700);
-    })
-
-
-
+  });
 
   //Animation
   setTimeout(() => {
@@ -436,20 +480,17 @@ function openNotesModule () {
     btnContainer.classList.add("zeroOpacity");
     checkBoxForm.classList.remove("disappear");
     btnContainer.classList.remove("disappear");
-  }, 700); 
-  
+  }, 700);
 
-  
   //NoteInput Fields
   const notesForm = document.createElement("div");
   notesForm.classList.add("zeroOpacity");
   notesForm.classList.add("notesFormTransitionComing");
   setTimeout(() => {
-
-  textHeader.classList.remove("fade-in");
-  checkBoxForm.insertAdjacentElement("afterend", notesForm);
-  notesForm.classList.add("notesForm");
-  notesForm.innerHTML = `
+    textHeader.classList.remove("fade-in");
+    checkBoxForm.insertAdjacentElement("afterend", notesForm);
+    notesForm.classList.add("notesForm");
+    notesForm.innerHTML = `
   <section>
   <div class="notesInputDiv">
     <label for="notesInput" class="notesLabel">Notes:</label>
@@ -469,22 +510,20 @@ function openNotesModule () {
   </div>
   `;
 
-  const notesSubmitBtn = document.querySelector(".notesSubmitBtn");
-  notesSubmitBtn.addEventListener("click", () => {
-    closeNotesModul(textHeaderContent);
-  })
+    const notesSubmitBtn = document.querySelector(".notesSubmitBtn");
+    notesSubmitBtn.addEventListener("click", () => {
+      closeNotesModul(textHeaderContent);
+    });
 
-  const notesCancelBtn = document.querySelector(".notesCancelBtn");
-  notesCancelBtn.addEventListener("click", () => {
-    closeNotesModul(textHeaderContent);
-  })
-
+    const notesCancelBtn = document.querySelector(".notesCancelBtn");
+    notesCancelBtn.addEventListener("click", () => {
+      closeNotesModul(textHeaderContent);
+    });
   }, 600);
-
 
   setTimeout(() => {
     notesForm.classList.remove("zeroOpacity");
-    
+
     notesForm.classList.add("appear");
     notesForm.classList.remove("notesFormTransitionComing");
 
@@ -494,8 +533,7 @@ function openNotesModule () {
   }, 700);
 }
 
-function closeNotesModul (textHeaderContent) {
-
+function closeNotesModul(textHeaderContent) {
   const notesForm = document.querySelector(".notesForm");
   const textHeader = document.querySelector("#textToday");
 
@@ -508,20 +546,15 @@ function closeNotesModul (textHeaderContent) {
       textHeader.classList.add("fade-in");
       setTimeout(() => textHeader.classList.remove("fade-in"), 700);
     }, 700);
-    })
-
-
-
-
+  });
 
   notesForm.classList.add("disappear");
   //Animation
   setTimeout(() => {
-
-    notesForm.classList.add("zeroOpacity"); 
+    notesForm.classList.add("zeroOpacity");
     notesForm.style.display = "none";
-  }, 300); 
-  
+  }, 300);
+
   const checkBoxes = document.querySelector("#checkBoxes");
   const buttonContainer = document.querySelector("#btnContainer");
   checkBoxes.style.display = "grid";
@@ -530,27 +563,25 @@ function closeNotesModul (textHeaderContent) {
   // const checkBoxForm = document.querySelector("#checkBoxes");
   // checkBoxForm.style.opacity = 0;
 
-
-
   setTimeout(() => {
+    checkBoxes.classList.add("appear");
+    buttonContainer.classList.add("appear");
+    checkBoxes.classList.remove("zeroOpacity");
+    buttonContainer.classList.remove("zeroOpacity");
 
-  checkBoxes.classList.add("appear");
-  buttonContainer.classList.add("appear");
-  checkBoxes.classList.remove("zeroOpacity");
-  buttonContainer.classList.remove("zeroOpacity");
-  
+    setTimeout(() => {
+      checkBoxes.classList.remove("appear");
+      buttonContainer.classList.remove("appear");
 
-  setTimeout(() => {
-    checkBoxes.classList.remove("appear");
-    buttonContainer.classList.remove("appear");
-    
-    //enable notesButton again
-    const notesButton = document.querySelector(".notesImg");
-    notesButton.addEventListener("click", () => {
-      openNotesModule();
-    }, { once: true });
-
-  }, 1000);
+      //enable notesButton again
+      const notesButton = document.querySelector(".notesImg");
+      notesButton.addEventListener(
+        "click",
+        () => {
+          openNotesModule();
+        },
+        { once: true },
+      );
+    }, 400);
   }, 700);
-
 }
