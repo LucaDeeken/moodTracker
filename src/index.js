@@ -45,3 +45,14 @@ export function loadHashMapFromLocalStorage() {
 // Aufruf der Funktion und Speichern des Rückgabewerts
 
 export const newHash = loadHashMapFromLocalStorage();
+
+const todayString = new Date().toLocaleDateString();
+const valueOfNotesAlreadyThere = newHash.getDay(todayString);
+
+if (valueOfNotesAlreadyThere != undefined) {
+  const moodValue = valueOfNotesAlreadyThere.mood;
+  const input = document.querySelector(`.inputCheckBox[value="${moodValue}"]`);
+  if (input != null) {
+    input.checked = true;
+  }
+}

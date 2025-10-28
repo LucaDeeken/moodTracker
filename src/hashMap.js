@@ -1,7 +1,10 @@
 export class Key {
-  constructor(date, mood) {
+  constructor(date, mood, notes, checkboxTitle, bool) {
     this.date = date;
     this.mood = mood;
+    this.notes = notes;
+    this.checkBoxTitle = checkboxTitle;
+    this.checkbox = bool;
   }
 }
 //builds default HashMap for 2025
@@ -28,15 +31,46 @@ export class HashMap {
     return this.hashCode;
   }
   //implements new day
-  set(mood) {
+  set(mood, notes, checkboxTitle, checkboxBool) {
     let todayString = this.dateGenerator();
-    const newKey = new Key(todayString, mood);
+    const newKey = new Key(
+      todayString,
+      mood,
+      notes ?? "",
+      checkboxTitle ?? "",
+      checkboxBool ?? false,
+    );
     this.hash(todayString);
     this.manageCapacity(this.hashCode);
-    this.pushKey(this.hashCode, newKey, todayString, mood);
+    this.pushKey(
+      this.hashCode,
+      newKey,
+      todayString,
+      mood,
+      notes,
+      checkboxTitle,
+      checkboxBool,
+    );
     localStorage.setItem("hashMap", this.toJSON());
     return this.hashCode;
   }
+
+  getDay(dateString) {
+    const hashCode = this.hash(dateString);
+    const checkYear = hashCode.slice(0, 4);
+    const checkMonth = hashCode.slice(4);
+    const yearArray = this.array.find((obj) => obj.year === checkYear);
+
+    if (!yearArray) return null;
+
+    const dayObj = yearArray.date[checkMonth - 1].find(
+      (obj) => obj.date === dateString,
+    );
+
+    console.log(dayObj);
+    return dayObj || null;
+  }
+
   //checks if the current year is present - and if not, creates it
   manageCapacity(hash) {
     const checkYear = hash.slice(0, 4);
@@ -54,7 +88,7 @@ export class HashMap {
     }
   }
   //pushes the new key into the destinyArray
-  pushKey(hash, key, todayString, mood) {
+  pushKey(hash, key, todayString, mood, notes, checkboxTitle, checkboxBool) {
     const checkYear = hash.slice(0, 4);
     const checkMonth = hash.slice(4);
     const yearArray = this.array.find((obj) => obj.year === checkYear);
@@ -67,6 +101,9 @@ export class HashMap {
     if (dayAlreadyThere != undefined) {
       console.log("yo");
       dayAlreadyThere.mood = mood;
+      dayAlreadyThere.notes = notes ?? "";
+      dayAlreadyThere.checkBoxTitle = checkboxTitle ?? "";
+      dayAlreadyThere.checkbox = checkboxBool ?? false;
     } else {
       yearArray.date[checkMonth - 1].push(key);
     }

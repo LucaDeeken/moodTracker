@@ -182,13 +182,13 @@ body {
   grid-row: 2/3;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Subtiler */
   width: 700px;
-  border-radius: 55px;
+  border-radius: 45px;
   background-color: #f8f9fa;
   justify-self: center;
   display: grid;
   grid-template-rows: 100px 1.5fr 0.6fr;
   transition: transform 0.5s ease;
-  height: 475px;
+  height: 463px;
 }
 
 #textContainerToday {
@@ -244,7 +244,7 @@ body {
   display: grid;
   grid-template-columns: 0.1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 0.1fr;
   justify-items: center;
-  transition: opacity 1.5s ease;
+  transition: opacity 0.7s ease;
 }
 
 #checkBoxes.active {

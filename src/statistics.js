@@ -110,23 +110,25 @@ function getGridsOnField(data, comingFromToday) {
   statisticFieldDOM.innerHTML = "";
 
   for (let i = 0; i < lengthOfArr; i++) {
-    const newDiv = document.createElement("div");
-    statisticFieldDOM.appendChild(newDiv);
     const ele = data.shift();
-    let dayNum = ele.date;
-    dayNum = Number(dayNum.split(".")[0]);
-    newDiv.textContent = dayNum + "th";
-    if (comingFromToday) {
-      newDiv.classList.add("statsField");
-    } else {
-      newDiv.classList.add("statsFieldFromMonth");
-    }
+    if (ele.mood != null) {
+      const newDiv = document.createElement("div");
+      statisticFieldDOM.appendChild(newDiv);
+      let dayNum = ele.date;
+      dayNum = Number(dayNum.split(".")[0]);
+      newDiv.textContent = dayNum + "th";
+      if (comingFromToday) {
+        newDiv.classList.add("statsField");
+      } else {
+        newDiv.classList.add("statsFieldFromMonth");
+      }
 
-    const colorOfMood = translateEmotionToColor(ele.mood);
-    newDiv.classList.add(colorOfMood);
-    const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
-    newDiv.style.backgroundColor = color;
-    newDiv.classList.add(".appear");
+      const colorOfMood = translateEmotionToColor(ele.mood);
+      newDiv.classList.add(colorOfMood);
+      const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
+      newDiv.style.backgroundColor = color;
+      newDiv.classList.add(".appear");
+    }
   }
 }
 

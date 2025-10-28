@@ -50,7 +50,46 @@ export function DOMtoday() {
       const selectedBox = checkBoxArray.find(
         (checkBox) => checkBox.checked === true,
       );
-      newHash.set(selectedBox.value);
+      const todayNotes = document.getElementById("notesInput");
+      const checkboxTitle = document.getElementById("inputCheckbox");
+      const checkboxBool = document.getElementById("notesCheckbox");
+
+      const notesForm = document.querySelector(".notesForm");
+
+      if (notesForm != undefined) {
+        newHash.set(
+          selectedBox.value,
+          todayNotes.value ?? "", // Default: leerer String
+          checkboxTitle.value ?? "", // Default: leerer String
+          checkboxBool.checked ?? false, // Default: false
+        );
+      } else {
+        const todayString = new Date().toLocaleDateString();
+        const valueOfNotesAlreadyThere = newHash.getDay(todayString);
+
+        let noteTextfieldValue = "";
+        let inputCheckboxValue = "";
+        let checkboxValue = false;
+        if (valueOfNotesAlreadyThere != undefined) {
+          noteTextfieldValue = valueOfNotesAlreadyThere.notes;
+          inputCheckboxValue = valueOfNotesAlreadyThere.checkBoxTitle;
+
+          if (valueOfNotesAlreadyThere.checkbox) {
+            checkboxValue = true;
+          } else {
+            checkboxValue = false;
+          }
+          newHash.set(
+            selectedBox.value,
+            noteTextfieldValue,
+            inputCheckboxValue,
+            checkboxValue,
+          );
+        } else {
+          newHash.set(selectedBox.value, "", "", false);
+        }
+      }
+
       pulseCheckbox(selectedBox.value);
       mood = textByMood(selectedBox.value);
 
@@ -436,6 +475,21 @@ function loadTodayHTMLNew() {
       <div id="btnContainer">
         <button type="submit" form="checkBoxes" id="submitBtn">Edit</button>
       </div>`;
+
+  // Display the previously selected mood and mark the corresponding checkbox in edit mode.
+  const todayString = new Date().toLocaleDateString();
+  const valueOfNotesAlreadyThere = newHash.getDay(todayString);
+
+  if (valueOfNotesAlreadyThere != undefined) {
+    const moodValue = valueOfNotesAlreadyThere.mood;
+    const input = document.querySelector(
+      `.inputCheckBox[value="${moodValue}"]`,
+    );
+    if (input != null) {
+      input.checked = true;
+    }
+  }
+
   const textToday = document.querySelector("#textToday");
   const checkBoxes = document.querySelector("#checkBoxes");
   const buttonText = document.querySelector("#submitBtn");
@@ -499,8 +553,8 @@ function openNotesModule() {
   <div class="notesCheckboxDiv">
     <label for="notesCheckbox" class="notesCheckboxLabel">Done?</label>
     <div class="notesCheckboxInputDiv">
-     <input id="inputCheckbox" placeholder="Enter what this checkbox represents..." >
-     <input type="checkbox" id="notesCheckbox" name="activity" value="sport">
+     <input id="inputCheckbox" placeholder="Enter what this checkbox represents..." form="checkBoxes" >
+     <input type="checkbox" id="notesCheckbox" name="activity" value="sport" form="checkBoxes">
      </div>
   </div>
   </section>
@@ -510,8 +564,32 @@ function openNotesModule() {
   </div>
   `;
 
+    const todayString = new Date().toLocaleDateString();
+    const valueOfNotesAlreadyThere = newHash.getDay(todayString);
+
+    const noteTextfieldValue = document.querySelector("#notesInput");
+    const inputCheckboxValue = document.querySelector("#inputCheckbox");
+    const checkboxValue = document.querySelector("#notesCheckbox");
+
+    if (valueOfNotesAlreadyThere != undefined) {
+      noteTextfieldValue.value = valueOfNotesAlreadyThere.notes;
+      inputCheckboxValue.value = valueOfNotesAlreadyThere.checkBoxTitle;
+
+      if (valueOfNotesAlreadyThere.checkbox) {
+        checkboxValue.checked = true;
+      } else {
+        checkboxValue.checked = false;
+      }
+    }
+
     const notesSubmitBtn = document.querySelector(".notesSubmitBtn");
     notesSubmitBtn.addEventListener("click", () => {
+      newHash.set(
+        null,
+        noteTextfieldValue.value,
+        inputCheckboxValue.value,
+        checkboxValue.checked,
+      );
       closeNotesModul(textHeaderContent);
     });
 
