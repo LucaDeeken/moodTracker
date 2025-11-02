@@ -11,7 +11,7 @@ DOMtoday();
 
 todayBtn.addEventListener("click", () => {
   const statisticFieldDOM = document.getElementById("statisticField");
-  const statisticsBorder = document.getElementById("statisticsBorder");
+  const statisticsBorder = document.getElementById("statisticsBorderGridNotes");
   if (statisticsBorder != undefined) {
     getTodayHTML();
   }

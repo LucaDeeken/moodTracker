@@ -229,7 +229,9 @@ export function getTodayHTML() {
   if (statisticField != undefined) {
     statisticField.classList.add("fade-out");
   } else {
-    const statisticsBorder = document.getElementById("statisticsBorder");
+    const statisticsBorder = document.getElementById(
+      "statisticsBorderGridNotes",
+    );
     statisticsBorder.classList.add("fade-out");
   }
 
