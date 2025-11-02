@@ -1177,7 +1177,7 @@ input[type="checkbox"] {
   }
 
   #inputCheckboxGrid {
-    width: 230px;
+    width: 220px;
     font-size: 11px;
   }
 
@@ -1216,6 +1216,7 @@ input[type="checkbox"] {
 
   #notesCheckboxGrid {
     margin-right: 2px;
+    transform: scale(1.5);
   }
 }
 
@@ -1240,11 +1241,15 @@ input[type="checkbox"] {
   }
 
   #inputCheckboxGrid {
-    width: 190px;
+    width: 180px;
   }
 
   #notesCheckboxGrid {
     transform: scale(1.5);
+  }
+
+  #checkBoxesGridArea input[type="checkbox"] {
+    transform: scale(1.4);
   }
 }
 
@@ -1258,5 +1263,8 @@ input[type="checkbox"] {
   }
   #notesCheckbox {
     transform: scale(1.9);
+  }
+  #checkBoxesGridArea input[type="checkbox"] {
+    transform: scale(1.3);
   }
 }
