@@ -11,6 +11,11 @@ DOMtoday();
 
 todayBtn.addEventListener("click", () => {
   const statisticFieldDOM = document.getElementById("statisticField");
+  const statisticsBorder = document.getElementById("statisticsBorder");
+  if (statisticsBorder != undefined) {
+    getTodayHTML();
+  }
+
   if (statisticFieldDOM == null) {
     return;
   } else {

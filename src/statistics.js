@@ -9,10 +9,15 @@ export function getStats(comingFromToday) {
   const textContainer = document.getElementById("textContainerToday");
   const form = document.getElementById("checkBoxes");
   const sbmbtn = document.getElementById("btnContainer");
-  textContainer.classList.add("fade-out");
-  form.classList.add("fade-out");
-  sbmbtn.classList.add("fade-out");
-  doneImage.classList.add("disappear");
+  if (textContainer != undefined) {
+    textContainer.classList.add("fade-out");
+    form.classList.add("fade-out");
+    sbmbtn.classList.add("fade-out");
+    doneImage.classList.add("disappear");
+  } else {
+    const monthName = document.querySelector("#monthName");
+    monthName.classList.add("fade-out");
+  }
 
   setTimeout(function () {
     mainArea.id = "";
@@ -132,6 +137,7 @@ function getGridsOnField(data, comingFromToday) {
 
       newDiv.addEventListener("click", () => {
         showGridDetails(ele);
+        comingFromToday = true;
       });
     }
   }

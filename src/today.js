@@ -225,7 +225,14 @@ export function getTodayHTML() {
   const textContainerStats = document.querySelector("#textContainerStats");
   const statisticField = document.querySelector("#statisticField");
   textContainerStats.classList.add("fade-out");
-  statisticField.classList.add("fade-out");
+
+  if (statisticField != undefined) {
+    statisticField.classList.add("fade-out");
+  } else {
+    const statisticsBorder = document.getElementById("statisticsBorder");
+    statisticsBorder.classList.add("fade-out");
+  }
+
   const mainAreaStats = document.querySelector("#mainAreaStats");
   mainAreaStats.style.transform = "scale(1)";
 
