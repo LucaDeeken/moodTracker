@@ -111,6 +111,7 @@ function getGridsOnField(data, comingFromToday) {
 
   for (let i = 0; i < lengthOfArr; i++) {
     const ele = data.shift();
+    console.log(ele);
     if (ele.mood != null) {
       const newDiv = document.createElement("div");
       statisticFieldDOM.appendChild(newDiv);
@@ -128,8 +129,174 @@ function getGridsOnField(data, comingFromToday) {
       const color = getComputedStyle(newDiv).getPropertyValue("--farbe");
       newDiv.style.backgroundColor = color;
       newDiv.classList.add(".appear");
+
+      newDiv.addEventListener("click", () => {
+        showGridDetails(ele);
+      });
     }
   }
+}
+
+function showGridDetails(ele) {
+  const statsField = document.querySelector("#statisticsBorder");
+  statsField.classList.add("disappear");
+  setTimeout(() => {
+    statsField.innerHTML = "";
+    statsField.classList.remove("disappear");
+    statsField.style.display = "block";
+    statsField.style.width = "100%";
+    statsField.innerHTML = `   
+          <form id="checkBoxesGridArea" >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="sad"
+              viewBox="0 0 24 24"
+              height="35px"
+            >
+              <path
+                d="M8 11V9a1 1 0 0 1 2 0v2a1 1 0 0 1-2 0zm7 1a1 1 0 0 0 1-1V9a1 1 0 0 0-2 0v2a1 1 0 0 0 1 1zm-3 2a6.036 6.036 0 0 0-4.775 2.368 1 1 0 1 0 1.55 1.264 4 4 0 0 1 6.45 0 1 1 0 0 0 1.55-1.264A6.036 6.036 0 0 0 12 14zm11-2A11 11 0 1 1 12 1a11.013 11.013 0 0 1 11 11zm-2 0a9 9 0 1 0-9 9 9.01 9.01 0 0 0 9-9z"
+              />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              id="happy"
+              viewBox="0 0 24 24"
+              height="35px"
+            >
+              <path
+                d="M12 1a11 11 0 1 0 11 11A11.013 11.013 0 0 0 12 1zm0 20a9 9 0 1 1 9-9 9.011 9.011 0 0 1-9 9zm6-8a6 6 0 0 1-12 0 1 1 0 0 1 2 0 4 4 0 0 0 8 0 1 1 0 0 1 2 0zM8 10V9a1 1 0 0 1 2 0v1a1 1 0 0 1-2 0zm6 0V9a1 1 0 0 1 2 0v1a1 1 0 0 1-2 0z"
+              />
+            </svg>
+            <div id="one">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="terror"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="two">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="depressed"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="three">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="veryBad"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="four">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="bad"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="five">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="discontent"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="six">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="okay"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="seven">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="fine"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="eight">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="good"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="nine">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="veryGood"
+                  class="inputCheckBox"
+                />
+              </label>
+            </div>
+            <div id="ten">
+              <label>
+                <input
+                  type="checkbox"
+                  name="option1"
+                  value="godlike"
+                  class="inputCheckBox"
+                />
+                </div>
+              </label>
+          </form>
+  <section>
+  <div class="notesInputDivGrid">
+    <label for="notesInputGrid" class="notesLabel">Notes:</label>
+    <textarea id="notesInputGrid" placeholder="What would you like to remember?" form="checkBoxes"></textarea>
+  </div>
+  <div class="notesCheckboxDivGrid">
+    <label for="notesCheckboxGrid" class="notesCheckboxLabel">Task Done?</label>
+    <div class="notesCheckboxInputDivGrid">
+     <input id="inputCheckboxGrid" placeholder="Enter what this checkbox represents..." form="checkBoxes" >
+     <input type="checkbox" id="notesCheckboxGrid" name="activity" value="sport" form="checkBoxes">
+     </div>
+  </div>
+  </section>
+  <div class="notesButtonDivGrid">
+  <button class="notesCancelBtnGrid">Cancel</button>
+  <button class="notesSubmitBtnGrid">Submit</button>
+  </div>`;
+    const headerDate = document.querySelector("#monthName");
+    headerDate.textContent = ele.date;
+    const input = document.querySelector(`.inputCheckBox[value="${ele.mood}"]`);
+    input.checked = true;
+
+    const noteTextfieldValue = document.querySelector("#notesInputGrid");
+    const inputCheckboxValue = document.querySelector("#inputCheckboxGrid");
+    const checkboxValue = document.querySelector("#notesCheckboxGrid");
+    noteTextfieldValue.value = ele.notes;
+    inputCheckboxValue.value = ele.checkBoxTitle;
+    checkboxValue.checked = ele.checkbox;
+  }, 600);
 }
 
 export function translateEmotionToColor(mood) {

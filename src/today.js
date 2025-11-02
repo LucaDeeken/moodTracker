@@ -551,7 +551,7 @@ function openNotesModule() {
     <textarea id="notesInput" placeholder="What would you like to remember?" form="checkBoxes"></textarea>
   </div>
   <div class="notesCheckboxDiv">
-    <label for="notesCheckbox" class="notesCheckboxLabel">Done?</label>
+    <label for="notesCheckbox" class="notesCheckboxLabel">Task Done?</label>
     <div class="notesCheckboxInputDiv">
      <input id="inputCheckbox" placeholder="Enter what this checkbox represents..." form="checkBoxes" >
      <input type="checkbox" id="notesCheckbox" name="activity" value="sport" form="checkBoxes">

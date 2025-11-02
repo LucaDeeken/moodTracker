@@ -92,14 +92,10 @@ export class HashMap {
     const checkYear = hash.slice(0, 4);
     const checkMonth = hash.slice(4);
     const yearArray = this.array.find((obj) => obj.year === checkYear);
-    console.log(todayString);
-    console.log(yearArray);
     const dayAlreadyThere = yearArray.date[checkMonth - 1].find(
       (obj) => obj.date === todayString,
     );
-    console.log(dayAlreadyThere);
     if (dayAlreadyThere != undefined) {
-      console.log("yo");
       dayAlreadyThere.mood = mood;
       dayAlreadyThere.notes = notes ?? "";
       dayAlreadyThere.checkBoxTitle = checkboxTitle ?? "";
@@ -111,7 +107,6 @@ export class HashMap {
   //generates a variable that contains today's date
   dateGenerator() {
     const todayString = new Date().toLocaleDateString();
-    console.log(todayString);
     return todayString;
   }
   toJSON() {
