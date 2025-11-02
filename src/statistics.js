@@ -145,10 +145,10 @@ function getGridsOnField(data, comingFromToday) {
 
 function showGridDetails(ele) {
   const statsField = document.querySelector("#statisticsBorder");
-  statsField.id = "statisticsBorderGridNotes";
   statsField.classList.add("disappear");
   setTimeout(() => {
     statsField.innerHTML = "";
+    statsField.id = "statisticsBorderGridNotes";
     statsField.classList.remove("disappear");
     statsField.style.display = "block";
     statsField.style.width = "100%";
