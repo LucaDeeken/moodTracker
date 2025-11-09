@@ -136,17 +136,21 @@ function getGridsOnField(data, comingFromToday) {
       newDiv.classList.add(".appear");
 
       newDiv.addEventListener("click", () => {
-        showGridDetails(ele);
+        showGridDetails(ele, comingFromToday);
         comingFromToday = true;
       });
     }
   }
 }
 
-function showGridDetails(ele) {
+function showGridDetails(ele, comingFromToday) {
   const statsField = document.querySelector("#statisticsBorder");
   statsField.classList.add("disappear");
   setTimeout(() => {
+    const arrowLeft = document.querySelector("#arrowLeft");
+    const arrowRight = document.querySelector("#arrowRight");
+    arrowLeft.style.opacity = "0";
+    arrowRight.style.opacity = "0";
     statsField.innerHTML = "";
     statsField.id = "statisticsBorderGridNotes";
     statsField.classList.remove("disappear");
@@ -290,7 +294,7 @@ function showGridDetails(ele) {
   </section>
   <div class="notesButtonDivGrid">
   <button class="notesCancelBtnGrid">Cancel</button>
-  <button class="notesSubmitBtnGrid">Submit</button>
+  <button class="notesSubmitBtnGrid">Edit</button>
   </div>`;
     const headerDate = document.querySelector("#monthName");
     headerDate.textContent = ele.date;
@@ -303,6 +307,54 @@ function showGridDetails(ele) {
     noteTextfieldValue.value = ele.notes;
     inputCheckboxValue.value = ele.checkBoxTitle;
     checkboxValue.checked = ele.checkbox;
+
+    //only one checkbox should be checked
+    document.querySelectorAll(".inputCheckBox").forEach((checkbox) => {
+      checkbox.addEventListener("change", function () {
+        if (this.checked) {
+          document.querySelectorAll(".inputCheckBox").forEach((cb) => {
+            if (cb !== this) cb.checked = false;
+          });
+        }
+      });
+    });
+    const editBtn = document.querySelector(".notesSubmitBtnGrid");
+    editBtn.addEventListener("click", () => {
+      //find the value of the checked Mood
+      const checkBoxes = document.getElementsByClassName("inputCheckBox");
+      const checkBoxArray = Array.from(checkBoxes);
+      const selectedBox = checkBoxArray.find(
+        (checkBox) => checkBox.checked === true,
+      );
+
+      newHash.set(
+        selectedBox.value,
+        noteTextfieldValue.value,
+        inputCheckboxValue.value,
+        checkboxValue.checked,
+        ele.date,
+      );
+      const mainArea = document.querySelector("#mainAreaStats");
+      mainArea.style.transition = "none";
+      const gridMainArea = document.querySelector("#statisticsBorderGridNotes");
+      gridMainArea.classList.add("disappear");
+      setTimeout(() => {
+        mainArea.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+      }, 600);
+      getStats(comingFromToday);
+    });
+
+    const cancelBtn = document.querySelector(".notesCancelBtnGrid");
+    cancelBtn.addEventListener("click", () => {
+      const mainArea = document.querySelector("#mainAreaStats");
+      mainArea.style.transition = "none";
+      const gridMainArea = document.querySelector("#statisticsBorderGridNotes");
+      gridMainArea.classList.add("disappear");
+      setTimeout(() => {
+        mainArea.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+      }, 600);
+      getStats(comingFromToday);
+    });
   }, 600);
 }
 

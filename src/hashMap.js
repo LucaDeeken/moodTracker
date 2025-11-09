@@ -31,8 +31,13 @@ export class HashMap {
     return this.hashCode;
   }
   //implements new day
-  set(mood, notes, checkboxTitle, checkboxBool) {
-    let todayString = this.dateGenerator();
+  set(
+    mood,
+    notes,
+    checkboxTitle,
+    checkboxBool,
+    todayString = this.dateGenerator(),
+  ) {
     const newKey = new Key(
       todayString,
       mood,

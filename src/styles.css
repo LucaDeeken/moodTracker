@@ -626,7 +626,12 @@ input[type="checkbox"] {
   height: 320px;
   justify-self: center;
   align-content: center;
+  opacity: 1;
   transition: opacity 0.6s ease;
+}
+
+#statisticsBorderGridNotes.disappear {
+  opacity: 0;
 }
 
 #statisticField {
@@ -811,7 +816,7 @@ input[type="checkbox"] {
   color: black;
   font-weight: 700;
   font-size: 12px;
-  height: 30px;
+  height: 40px;
   width: 80px;
   border: none;
   border-radius: 15px;

@@ -4,7 +4,7 @@ import { getStats, getMonthlyStats } from "./statistics.js";
 import { HashMap } from "./hashMap.js";
 import { DOMtoday, getTodayHTML } from "./today.js";
 
-const statsBtn = document.getElementById("statisticsText");
+export const statsBtn = document.getElementById("statisticsText");
 const todayBtn = document.getElementById("todayText");
 
 DOMtoday();
@@ -26,6 +26,7 @@ todayBtn.addEventListener("click", () => {
 statsBtn.addEventListener("click", () => {
   const statisticFieldDOM = document.getElementById("statisticField");
   const comingFromToday = true;
+  console.log(comingFromToday);
   if (statisticFieldDOM == null) {
     getStats(comingFromToday);
   } else {
